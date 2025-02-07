@@ -1,4 +1,4 @@
-package com.designpattern.creational;
+package com.datastructure.designpattern.creational;
 
 // Product Interface
 interface Logger {
