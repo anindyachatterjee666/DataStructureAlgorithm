@@ -11,12 +11,12 @@ class SingletonEarly {
     //    static variable to hold the single instance of the class. Early Instantiation.
     private static SingletonEarly instanceEarly = new SingletonEarly();
 
-    //   static variable to hold the single instance of the class. For Early instantiation (As the Application is up, it will create the instance.)
+    //   private constructor to prevent instantiation. For Early instantiation (As the Application turns on, it will create the instance.)
     private SingletonEarly() {
         System.out.println("Singleton instance created");
     }
 
-    //    static method to get the single instance of the class. it's called lazy instantiation.
+    //    static method to get the single instance of the class. it's called early instantiation.
     public static SingletonEarly getInstanceEarly() {
         System.out.println("fetching instance");
         return instanceEarly;
@@ -182,7 +182,6 @@ public class SingletonPattern {
 
         System.out.println(reflectionInstance.hashCode());
         System.out.println(s1.hashCode());
-
 
     }
 }
