@@ -17,7 +17,7 @@ class ConsoleLogger implements Logger {
 class FileLogger implements Logger {
 
     @Override
-    public void log(String message){
+    public void log(String message) {
         System.out.println("File Logger :" + message);
     }
 }
@@ -25,7 +25,7 @@ class FileLogger implements Logger {
 class DatabaseLogger implements Logger {
 
     @Override
-    public void log(String message){
+    public void log(String message) {
         System.out.println("Database Logger :" + message);
     }
 }
@@ -40,6 +40,18 @@ class LoggerFactory {
             default -> throw new IllegalStateException("Unknown Logger Type: " + type);
         };
     }
+
+//    public static Logger getLogger(String type) {
+//        if (type.equalsIgnoreCase("console")) {
+//            return new ConsoleLogger();
+//        } else if (type.equalsIgnoreCase("file")) {
+//            return new FileLogger();
+//        } else if (type.equalsIgnoreCase("database")) {
+//            return new DatabaseLogger();
+//        } else {
+//            return (Logger) new IllegalArgumentException("Unknown Logger Type: " + type);
+//        }
+//    }
 }
 
 public class FactoryPattern {
