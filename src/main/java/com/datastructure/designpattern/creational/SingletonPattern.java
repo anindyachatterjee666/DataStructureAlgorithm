@@ -1,5 +1,6 @@
 package com.datastructure.designpattern.creational;
 
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
@@ -141,9 +142,40 @@ class SingletonReflection {
 }
 
 
+// prevent from Deserialization
+class SingletonSerialization implements Serializable {
+
+    //    static variable to hold the single instance of the class. Lazy Instantiation.
+    private static volatile SingletonSerialization instance = null;
+
+    //    private constructor to prevent instantiation.
+    private SingletonSerialization() {
+        System.out.println("Singleton instance created");
+    }
+
+    protected Object readResolve(){
+        return instance;
+    }
+
+    //    use "synchronized" for locking.
+    public static SingletonSerialization getInstance() {
+        if (instance == null) {     // optimisation
+            synchronized (SingletonSerialization.class) {    // t1, t2
+                if (instance == null) {      // double checking
+                    System.out.println("Creating first instance");
+                    instance = new SingletonSerialization();
+                }
+            }
+        }
+        System.out.println("fetching instance");
+        return instance;
+    }
+}
+
+
 // main
 public class SingletonPattern {
-    public static void main(String[] args) throws CloneNotSupportedException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws CloneNotSupportedException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException, ClassNotFoundException {
 
         // Early Instantiation
 //        SingletonEarly s1 = SingletonEarly.getInstanceEarly();
@@ -156,11 +188,14 @@ public class SingletonPattern {
 //        System.out.println("Are both instances same ?  -> " + (s1 == s2));
 
 
-        // we can break Singleton by multithreading. So prevent this we use "synchronised" keyword.
+
+        // Prevent Multithreading
 //        ExecutorService executor = Executors.newFixedThreadPool(2);
 //        for (int i = 0; i < 15; i++) {
 //            executor.execute(() -> SingletonThreadSafety.getInstance());
 //        }
+
+
 
         // Prevent Cloning
 //        SingletonCloning s1 = SingletonCloning.getInstance();
@@ -170,18 +205,36 @@ public class SingletonPattern {
 //        System.out.println(s2.hashCode());
 
 
-        // prevent reflection
-        SingletonReflection s1 = SingletonReflection.getInstance(); // 1 obj is created
 
-        SingletonReflection reflectionInstance = null;
-        java.lang.reflect.Constructor<?>[] constructors = SingletonReflection.class.getDeclaredConstructors();
-        for(Constructor<?> constructor : constructors) {
-            constructor.setAccessible(true);
-            reflectionInstance = (SingletonReflection) constructor.newInstance();
-        }
+        // Prevent Reflection
+//        SingletonReflection s1 = SingletonReflection.getInstance(); // 1 obj is created
 
-        System.out.println(reflectionInstance.hashCode());
-        System.out.println(s1.hashCode());
+//        SingletonReflection reflectionInstance = null;
+//        java.lang.reflect.Constructor<?>[] constructors = SingletonReflection.class.getDeclaredConstructors();
+//        for(Constructor<?> constructor : constructors) {
+//            constructor.setAccessible(true);
+//            reflectionInstance = (SingletonReflection) constructor.newInstance();
+//        }
+//
+//        System.out.println(reflectionInstance.hashCode());
+//        System.out.println(s1.hashCode());
 
+
+
+        // Prevent Deserialization
+        SingletonSerialization instance1 = SingletonSerialization.getInstance();
+
+//        Serializing "instance1" into File
+        ObjectOutput out = new ObjectOutputStream(new FileOutputStream("singleton.ser"));
+        out.writeObject(instance1);
+        out.close();
+
+//        Deserializing "instance1" into File
+        ObjectInput in = new ObjectInputStream(new FileInputStream("singleton.ser"));
+        SingletonSerialization instance2 = (SingletonSerialization) in.readObject();
+        in.close();
+
+        System.out.println(instance1.hashCode());
+        System.out.println(instance2.hashCode());
     }
 }
