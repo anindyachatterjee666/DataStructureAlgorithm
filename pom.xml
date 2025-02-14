@@ -46,6 +46,11 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
@@ -67,6 +72,7 @@
                     <target>17</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
