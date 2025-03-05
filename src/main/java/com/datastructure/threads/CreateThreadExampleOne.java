@@ -39,13 +39,13 @@ public class CreateThreadExampleOne {
 //        objThread3.start();
 
 
-        // Use Runnable with Lambda Expression for better code readability
+        // Daemon Threads (Use Runnable with Lambda Expression for better code readability )
 //        Runnable objRunnable2 = () -> {
 //            System.out.println("Thread-4 started");
 //            System.out.println("Thread State -> " + Thread.currentThread().getState());
 //            System.out.println("Thread Name -> "+Thread.currentThread().getName());
 //            try {
-//                Thread.sleep(5000);
+//                Thread.sleep(2000);
 //            } catch (InterruptedException e) {
 //                throw new RuntimeException(e);
 //            }
@@ -59,38 +59,38 @@ public class CreateThreadExampleOne {
 
 
 
-        //
-        Runnable objRunnable1 = () -> {
-            System.out.println("Thread-1 started");
-            System.out.println("Thread-1 State -> " + Thread.currentThread().getState());
-            System.out.println("Thread-1 Name -> "+Thread.currentThread().getName());
-            System.out.println(shareObject.hashCode());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("Thread-1 completed");
-        };
-
-        Runnable objRunnable2 = () -> {
-            System.out.println("Thread-2 started");
-            System.out.println("Thread-2 State -> " + Thread.currentThread().getState());
-            System.out.println("Thread-2 Name -> "+Thread.currentThread().getName());
-            System.out.println(shareObject.hashCode());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("Thread-2 completed");
-        };
-
-        Thread objThread1 = new Thread(objRunnable1, "Runnable Thread-1");
-        objThread1.start();
-
-        Thread objThread2 = new Thread(objRunnable2, "Runnable Thread-2");
-        objThread2.start();
+        //Shared Memory Model
+//        Runnable objRunnable1 = () -> {
+//            System.out.println("Thread-1 started");
+//            System.out.println("Thread-1 State -> " + Thread.currentThread().getState());
+//            System.out.println("Thread-1 Name -> "+Thread.currentThread().getName());
+//            System.out.println(shareObject.hashCode());
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            System.out.println("Thread-1 completed");
+//        };
+//
+//        Runnable objRunnable2 = () -> {
+//            System.out.println("Thread-2 started");
+//            System.out.println("Thread-2 State -> " + Thread.currentThread().getState());
+//            System.out.println("Thread-2 Name -> "+Thread.currentThread().getName());
+//            System.out.println(shareObject.hashCode());
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            System.out.println("Thread-2 completed");
+//        };
+//
+//        Thread objThread1 = new Thread(objRunnable1, "Runnable Thread-1");
+//        objThread1.start();
+//
+//        Thread objThread2 = new Thread(objRunnable2, "Runnable Thread-2");
+//        objThread2.start();
 
 //        System.out.println("Main Thread Ended");
 
