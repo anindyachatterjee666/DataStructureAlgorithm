@@ -36,6 +36,7 @@ public class ThreadLocalExample {
 //        requestThread1.start();
 //        requestThread2.start();
 
+
         // Use-case -> you want the child threads to inherit some data or state from the parent thread
         InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
 
