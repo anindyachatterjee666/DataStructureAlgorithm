@@ -7,9 +7,8 @@ package com.datastructure.threads;
 //    }
 //}
 
-
+// main
 public class CreateThreadExampleOne {
-
     public static Object shareObject = new Object();
     public static void main(String[] args) {
 
