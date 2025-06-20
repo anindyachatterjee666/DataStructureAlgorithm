@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 class Computer {
-
     private String HDD;
     private String RAM;
     private boolean isGraphicsCardEnabled;
@@ -39,7 +38,6 @@ class Computer {
 
 //    static inner ComputerBuilder class
     public static class ComputerBuilder {
-
         private String HDD;
         private String RAM;
         private boolean isGraphicsCardEnabled;
